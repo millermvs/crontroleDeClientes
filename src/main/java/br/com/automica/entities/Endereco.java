@@ -1,25 +1,59 @@
 package br.com.automica.entities;
 
-import java.util.UUID;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "endereco")
 public class Endereco {
-	
-	private UUID id;
+
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Integer id;
+
+	@Column(name = "cep", length = 8, nullable = false)
 	private String cep;
+
+	@Column(name = "rua", length = 100)
 	private String rua;
+
+	@Column(name = "numero", length = 10)
 	private String numero;
+
+	@Column(name = "bairro", length = 100)
 	private String bairro;
+
+	@Column(name = "cidade", length = 100)
 	private String cidade;
+
+	@Column(name = "estado", length = 2)
 	private String estado;
+
+	@Column(name = "pais", length = 100)
 	private String pais;
+
+	@Column(name = "complemento", length = 20)
 	private String complemento;
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "cliente_id", nullable = false, foreignKey = @ForeignKey(name = "fk_endereco_cliente"))
+	private Cliente cliente;
 
 	public Endereco() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Endereco(UUID id, String cep, String rua, String numero, String bairro, String cidade, String estado, String pais,
-			String complemento) {
+	public Endereco(Integer id, String cep, String rua, String numero, String bairro, String cidade, String estado,
+			String pais, String complemento) {
 		this.id = id;
 		this.cep = cep;
 		this.rua = rua;
@@ -30,12 +64,12 @@ public class Endereco {
 		this.pais = pais;
 		this.complemento = complemento;
 	}
-	
-	public UUID getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -107,6 +141,14 @@ public class Endereco {
 	public String toString() {
 		return "Endereco [cep=" + cep + ", rua=" + rua + ", numero=" + numero + ", bairro=" + bairro + ", cidade="
 				+ cidade + ", estado=" + estado + ", pais=" + pais + ", complemento=" + complemento + "]";
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 }

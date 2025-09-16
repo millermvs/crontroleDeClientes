@@ -1,18 +1,52 @@
-version: '3.8'
-
 services:
+  scc_api:
+    container_name: springboot-sccapi
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - sccapi-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/db_scc
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: "bh@scara"
+      # Hibernate crie/atualize as colunas/tabelas:
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      # Log mais verboso para ver o SQL gerado
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
+      TZ: America/Sao_Paulo
+
   postgres:
-    image: postgres:15
-    container_name: scc_postgres
+    image: postgres:16
+    container_name: postgres-sccapi
     restart: always
     environment:
       POSTGRES_DB: db_scc
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: "bh@scara"
+      TZ: America/Sao_Paulo
     ports:
-      - "5432:5432"
+      - "5438:5432"
+    networks:
+      - sccapi-network
     volumes:
-      - scc_postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d db_scc -h 127.0.0.1 -p 5432"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+networks:
+  sccapi-network:
 
 volumes:
-  scc_postgres_data:
+  postgres_data:
