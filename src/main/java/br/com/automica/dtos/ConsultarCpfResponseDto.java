@@ -5,12 +5,12 @@ import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
-public class CadastrarClienteResponseDto {
-	
+@Setter
+public class ConsultarCpfResponseDto {
+
 	private UUID id;
 	private String nome;
-	private Long idEndereco;
+	private String cpf;
 
 }

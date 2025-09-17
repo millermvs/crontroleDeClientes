@@ -18,7 +18,7 @@ public class Endereco {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Integer id;
+	private Long id;
 
 	@Column(name = "cep", length = 8, nullable = false)
 	private String cep;
@@ -52,7 +52,7 @@ public class Endereco {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Endereco(Integer id, String cep, String rua, String numero, String bairro, String cidade, String estado,
+	public Endereco(Long id, String cep, String rua, String numero, String bairro, String cidade, String estado,
 			String pais, String complemento) {
 		this.id = id;
 		this.cep = cep;
@@ -65,11 +65,11 @@ public class Endereco {
 		this.complemento = complemento;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

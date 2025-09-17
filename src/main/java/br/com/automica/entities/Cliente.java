@@ -34,7 +34,7 @@ public class Cliente {
 	@Column(name = "nome", length = 100, nullable = false)
 	private String nome;
 
-	@Column(name = "cpf", length = 11, nullable = false)
+	@Column(name = "cpf", length = 11, nullable = false, unique = true)
 	private String cpf;
 
 	@Column(name = "data_nasc")
