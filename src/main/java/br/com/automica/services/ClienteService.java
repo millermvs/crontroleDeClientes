@@ -11,6 +11,7 @@ import br.com.automica.dtos.ConsultarCpfRequestDto;
 import br.com.automica.dtos.ConsultarCpfResponseDto;
 import br.com.automica.entities.Cliente;
 import br.com.automica.entities.Endereco;
+import br.com.automica.exceptions.CpfJaCadastradoException;
 import br.com.automica.exceptions.CpfNaoEncontradoException;
 import br.com.automica.repositories.ClienteRepository;
 import br.com.automica.repositories.EnderecoRepository;
@@ -25,6 +26,8 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 
 	public CadastrarClienteResponseDto cadastrarCliente(CadastrarClienteRequestDto request) {
+		if (clienteRepository.findCpf(request.getCpf()) != null)
+			throw new CpfJaCadastradoException();
 
 		var cliente = new Cliente();
 		cliente.setNome(request.getNome());
@@ -59,7 +62,7 @@ public class ClienteService {
 	public ConsultarCpfResponseDto consultarCpf(ConsultarCpfRequestDto request) {
 		if (clienteRepository.findCpf(request.getCpf()) == null) {
 			throw new CpfNaoEncontradoException();
-			
+
 		} else {
 			var cliente = clienteRepository.findCpf(request.getCpf());
 
