@@ -41,7 +41,7 @@ public class Endereco {
 	@Column(name = "pais", length = 100)
 	private String pais;
 
-	@Column(name = "complemento", length = 20)
+	@Column(name = "complemento", length = 30)
 	private String complemento;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)

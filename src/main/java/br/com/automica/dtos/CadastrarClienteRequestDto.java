@@ -9,30 +9,30 @@ import lombok.Setter;
 @Setter
 public class CadastrarClienteRequestDto {
 
-	@Pattern(regexp = "^[A-Za-zÀ-Üà-ü\\s]{3,100}$", message = "O nome só pode ter letras e espaços e deve conter no mínio 3 caracteres")
+	@Pattern(regexp = "^[A-Za-zÀ-Üà-ü\\s]{3,100}$", message = "O nome só pode ter letras e espaços e deve conter no mínimo 3 caracteres")
 	@NotEmpty(message = "O campo não pode estar vazio")
 	private String nome;
 
-	@Pattern(regexp = "^\\d{11}$", message = "Deve conter 11 números. Ex.: 12345678901")
+	@Pattern(regexp = "^[0-9]{11}$", message = "Deve conter 11 números. Ex.: 12345678901")
 	@NotEmpty(message = "O campo não pode estar vazio")
 	private String cpf;
 
-	@Pattern(regexp = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$", message = "Deve ser neste formato. Ex.: 1990-05-15")
+	@Pattern(regexp = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$", message = "Data inválida ou erro de formato. Ex.: 1990-05-15")
 	@NotEmpty(message = "O campo não pode estar vazio")
 	private String dataNasc;
 
-	@Pattern(regexp = "^\\d{2}\\d{2}\\d{8,9}$", message = "Deve conter 12 ou 13 números. Ex.: 5521000000000")
+	@Pattern(regexp = "^[0-9]{12,13}$", message = "Deve conter 12 ou 13 números. Ex.: 5521000000000")
 	@NotEmpty(message = "O campo não pode estar vazio")
 	private String whatsapp;
 
-	@Pattern(regexp = ("^\\d{8}$"), message = "Deve conter oito números. Ex.: 12345678")
+	@Pattern(regexp = ("^[0-9]{8}$"), message = "Deve conter oito números. Ex.: 12345678")
 	@NotEmpty(message = "O campo não pode estar vazio")
 	private String cep;
 
 	@Pattern(regexp = "^[A-Za-zÀ-Üà-ü\\s]{1,100}$", message = "O nome só pode ter letras e espaços e deve conter de 1 até 100 caracteres.")
 	private String rua;
 
-	@Pattern(regexp = "^\\d{1,10}$", message = "No máximo 10 dígitos")
+	@Pattern(regexp = "^[A-Za-z0-9]{1,10}$", message = "No máximo 10 caracteres")
 	@NotEmpty(message = "O campo não pode estar vazio")
 	private String numero;
 
@@ -52,6 +52,7 @@ public class CadastrarClienteRequestDto {
 	@NotEmpty(message = "O campo não pode estar vazio")
 	private String pais;
 
+	@Pattern(regexp = "^[0-9A-Za-zÀ-Üà-ü\\s]{1,50}$", message = "No máximo 50 caracteres")
 	private String complemento;
 
 }

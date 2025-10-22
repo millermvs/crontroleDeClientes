@@ -43,7 +43,7 @@ public class Cliente {
 
 	@Column(name = "whatsapp", length = 13, nullable = false)
 	private String whatsapp;
-
+	
 	@Column(name = "cliente_ativo")
 	private Boolean clienteAtivo;
 

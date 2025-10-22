@@ -11,7 +11,7 @@ COPY . /app
 RUN ./mvnw -B clean package -DskipTests
 
 # Porta em que o projeto será executado
-EXPOSE 8080
+EXPOSE 8082
 
 # Script para executar o projeto
 CMD ["java", "-jar", "target/scc-0.0.1-SNAPSHOT.jar"]
