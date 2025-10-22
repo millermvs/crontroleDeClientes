@@ -52,7 +52,7 @@ public class CadastrarClienteRequestDto {
 	@NotEmpty(message = "O campo não pode estar vazio")
 	private String pais;
 
-	@Pattern(regexp = "^[0-9A-Za-zÀ-Üà-ü\\s]{1,50}$", message = "No máximo 50 caracteres")
+	@Pattern(regexp = "^[0-9A-Za-zÀ-Üà-ü\\s]{0,50}$", message = "No máximo 50 caracteres")
 	private String complemento;
 
 }
